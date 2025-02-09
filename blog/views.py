@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect
@@ -16,10 +17,26 @@ from .models import Post
 class BlogListView(LoginRequiredMixin, ListView):
     model = Post
     template_name = "home.html"
+    paginate_by = 9
 
     def get_queryset(self):
         user = self.request.user
         return Post.objects.filter(Q(is_public=True) | Q(author=user)).distinct()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        posts = self.get_queryset()
+        paginator = Paginator(posts, self.paginate_by)
+        page = self.request.GET.get("page")
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
+        context["posts"] = posts
+        context["page_obj"] = posts
+        return context
 
 
 class CommentGet(DetailView):
