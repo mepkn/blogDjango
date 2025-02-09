@@ -1,0 +1,7 @@
+asgiref==3.8.1
+Django==5.1.5
+django-browser-reload==1.18.0
+django-debug-toolbar==5.0.1
+django-vite==3.0.6
+sqlparse==0.5.3
+tzdata==2025.1
