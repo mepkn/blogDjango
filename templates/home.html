@@ -2,11 +2,13 @@
 {% block content %}
   <div class="py-2 grid gap-2 grid-cols-[repeat(auto-fill,minmax(min(100%,250px),1fr))]">
     {% for post in post_list %}
-      <article class="rounded-md bg-indigo-300 dark:bg-blue-950 p-4 ring-3 ring-indigo-50 sm:p-6 lg:p-8 flex flex-col">
-        <h3 class="dark:text-white text-lg font-medium sm:text-xl"><a href="{{ post.get_absolute_url }}" class="hover:underline">{{ post.title }}</a></h3>
-        <p class="mt-1 text-sm dark:text-white text-gray-700 line-clamp-3 flex-grow">{{ post.body }}</p>
-        <p class="pt-2 mt-auto text-gray-500 text-xs font-medium">👤{{ post.author }}</p>
-      </article>
+      <a href="{{ post.get_absolute_url }}" class="hover:underline">
+        <article class="rounded-md bg-indigo-300 dark:bg-blue-950 p-4 ring-3 ring-indigo-50 sm:p-6 lg:p-8 flex flex-col">
+          <h3 class="dark:text-white text-lg font-medium sm:text-xl">{{ post.title }}</h3>
+          <p class="mt-1 text-sm dark:text-white text-gray-700 line-clamp-3 flex-grow">{{ post.body }}</p>
+          <p class="pt-2 mt-auto text-gray-500 text-xs font-medium">👤{{ post.author }}</p>
+        </article>
+      </a>
     {% endfor %}
   </div>
   <nav class="flex justify-center mt-4">
