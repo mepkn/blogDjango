@@ -12,10 +12,10 @@ class Post(models.Model):
     )
     is_public = models.BooleanField(default=True)
     created_date = models.DateTimeField(auto_now_add=True)
-    modified_date = models.DateTimeField(auto_now=True)
+    updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ["-modified_date"]
+        ordering = ["-updated_date"]
 
     def __str__(self):
         return self.title
@@ -32,10 +32,10 @@ class Comment(models.Model):
         on_delete=models.CASCADE,
     )
     created_date = models.DateTimeField(auto_now_add=True)
-    modified_date = models.DateTimeField(auto_now=True)
+    updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ["-modified_date"]
+        ordering = ["-updated_date"]
 
     def __str__(self):
         return self.comment
