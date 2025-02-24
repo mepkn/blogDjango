@@ -11,10 +11,11 @@ class Post(models.Model):
         on_delete=models.CASCADE,
     )
     is_public = models.BooleanField(default=True)
-    date = models.DateTimeField(auto_now_add=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ["-date"]
+        ordering = ["-modified_date"]
 
     def __str__(self):
         return self.title
@@ -30,10 +31,11 @@ class Comment(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
-    date = models.DateTimeField(auto_now_add=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ["-date"]
+        ordering = ["-modified_date"]
 
     def __str__(self):
         return self.comment
